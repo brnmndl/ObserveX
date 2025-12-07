@@ -1,0 +1,38 @@
+# Docker and container-related
+.env
+docker-compose.override.yml
+
+# Data directories
+data/
+prometheus-data/
+loki-data/
+tempo-data/
+grafana-data/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Node modules (if any JS tooling is added)
+node_modules/
+
+# Python (if any Python tooling is added)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
