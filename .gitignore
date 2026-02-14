@@ -36,3 +36,11 @@ __pycache__/
 *.py[cod]
 .venv/
 venv/
+
+# webapp specific
+# keyJournal/data/
+keyJournal/secrets/
+keyJournal/logs/
+keyJournal/*.log
+
+# Misc
