@@ -1,0 +1,24 @@
+services:
+  webapp:
+    build: .
+    container_name: keyjournal
+    environment:
+      - KEYJOURNAL_TOKENS_FILE=/run/secrets/keyjournal_tokens
+    ports:
+      - "8907:8907"
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    restart: unless-stopped
+    networks:
+      - observex-network
+    secrets:
+      - keyjournal_tokens
+
+networks:
+  observex-network:
+    driver: bridge
+
+secrets:
+  keyjournal_tokens:
+    file: ./secrets/keyjournal_tokens

@@ -1,0 +1,84 @@
+api:
+  enabled: true
+  address: "0.0.0.0:8686"
+
+################# Sources #################
+sources:
+  # Vector internal metrics
+  internal_metrics:
+    type: internal_metrics
+    scrape_interval_secs: 60
+
+  # Docker container logs
+  docker_logs:
+    type: docker_logs
+    include_images:
+      - "keyjournal"
+      - "prometheus"
+      - "loki"
+
+  # File input for KeyJournal logs
+  keyjournal_logs:
+    type: file
+    include:
+      - /logs/keyjournal/app.log
+    read_from: beginning
+    
+
+################# Transforms #################
+transforms:
+  # Parse JSON logs
+  parse_json:
+    type: remap
+    inputs:
+      - keyjournal_logs
+    source: |
+      . = parse_json!(.message)
+      .source = "vector"
+
+  # Add metadata
+  add_metadata:
+    type: remap
+    inputs:
+      - parse_json
+    source: |
+      .environment = "observex"
+      .ingested_at = now()
+
+################# Sinks #################
+sinks:
+  # Send to Loki
+  loki_sink:
+    type: loki
+    inputs:
+      - add_metadata
+    endpoint: http://192.168.1.174:3100
+    encoding:
+      codec: json
+    labels:
+      app: "{{ app }}"
+      source: "vector"
+    
+# Send to Prometheus (metrics via remote write)
+#  prometheus_sink:
+#    type: prometheus_remote_write
+#    inputs:
+#      - internal_metrics
+#    endpoint: http://192.168.1.174:9090/api/v1/write
+
+  # Console output for debugging
+  console_output:
+    type: console
+    inputs:
+      - add_metadata
+    encoding:
+      codec: json
+
+  # File output
+  # file_output:
+  #   type: file
+  #   inputs:
+  #     - add_metadata
+  #   path: /var/lib/vector/output-%Y-%m-%d.log
+  #   encoding:
+  #     codec: json

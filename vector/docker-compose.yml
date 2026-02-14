@@ -1,0 +1,23 @@
+services:
+  vector:
+    image: timberio/vector:latest-alpine
+    container_name: vector
+    ports:
+      - "8686:8686"  # Vector API
+    volumes:
+      - ./vector.yaml:/etc/vector/vector.yaml:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - vector-data:/var/lib/vector
+      - ../keyJournal/logs:/logs/keyjournal:ro
+    environment:
+      - VECTOR_CONFIG=/etc/vector/vector.yaml
+    restart: unless-stopped
+    networks:
+      - observex-network
+
+networks:
+  observex-network:
+    driver: bridge
+
+volumes:
+  vector-data:
