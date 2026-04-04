@@ -7,6 +7,13 @@ services:
     ports:
       - "3000:3000"
     environment:
+      # Anonymous access — view dashboards only, no editing
       GF_AUTH_ANONYMOUS_ENABLED: "true"
-      GF_AUTH_ANONYMOUS_ORG_ROLE: "Admin"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: "Viewer"
+      # Restrict Viewer role to dashboards only
+      GF_USERS_VIEWERS_CAN_EDIT: "false"
+      GF_DASHBOARDS_MIN_REFRESH_INTERVAL: "5m"
+      # Hide settings/admin UI from non-admins
+      GF_SECURITY_DISABLE_GRAVATAR: "true"
+      GF_EXPLORE_ENABLED: "false"
     restart: unless-stopped
