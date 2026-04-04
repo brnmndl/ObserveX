@@ -1,0 +1,26 @@
+# How often to poll Twelve Data API.
+# Free tier: 800 API calls/day, 8 calls/min.
+# Batch endpoint (all tickers in one call) = 1 credit per cycle.
+# At 5m interval → 288 calls/day — well within the free limit.
+# Supported units: s (seconds), m (minutes), h (hours)
+interval: 5m
+
+tickers:
+  # --- US Tech ---
+  - AAPL    # Apple
+  - MSFT    # Microsoft
+  - GOOGL   # Alphabet Class A
+  - NVDA    # NVIDIA
+  - META    # Meta Platforms
+  - AMZN    # Amazon
+  - TSLA    # Tesla
+
+  # --- Broad Market ETFs ---
+  - SPY     # S&P 500
+  - QQQ     # Nasdaq-100
+  - VTI     # Vanguard Total Market
+
+  # --- Add your own below ---
+  # - NFLX
+  # - AMD
+  # - PLTR
