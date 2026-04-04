@@ -56,7 +56,6 @@ sinks:
     encoding:
       codec: json
     labels:
-      app: "{{ app }}"
       source: "vector"
     
 # Send to Prometheus (metrics via remote write)

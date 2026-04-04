@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  stock-exporter:
+    build: .
+    container_name: stock-exporter
+    # Mount your custom stock list — edits take effect on next container restart
+    volumes:
+      - ./stocks.yaml:/app/stocks.yaml:ro
+    ports:
+      - "8000:8000"
+    environment:
+      STOCKS_CONFIG: /app/stocks.yaml
+      METRICS_PORT: "8000"
+      # ── Pick ONE mode ──
+      # Option A: Demo mode (mock data, no API key needed — great for testing)
+      DEMO_MODE: "true"
+      # Option B: Real data — get a free key at https://twelvedata.com/pricing
+      # TWELVE_DATA_API_KEY: "your-key-here"
+    restart: unless-stopped
