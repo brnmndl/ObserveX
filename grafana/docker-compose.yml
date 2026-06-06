@@ -19,6 +19,7 @@ services:
       # Hide settings/admin UI from non-admins
       GF_SECURITY_DISABLE_GRAVATAR: "true"
       GF_EXPLORE_ENABLED: "false"
+      GF_PANELS_DISABLE_SANITIZE_HTML: "true"
     restart: unless-stopped
 
 volumes:
