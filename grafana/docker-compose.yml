@@ -18,7 +18,6 @@ services:
       GF_DASHBOARDS_MIN_REFRESH_INTERVAL: "1d"
       # Hide settings/admin UI from non-admins
       GF_SECURITY_DISABLE_GRAVATAR: "true"
-      GF_EXPLORE_ENABLED: "false"
       GF_EXPLORE_ENABLED: "true"
       GF_PANELS_DISABLE_SANITIZE_HTML: "true"
     restart: unless-stopped
