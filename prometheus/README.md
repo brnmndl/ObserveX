@@ -1,13 +1,13 @@
 # Prometheus - Metrics Collection & Monitoring
 
-A powerful open-source monitoring and alerting toolkit for collecting and storing time-series metrics data.
+Open-source monitoring and alerting toolkit for collecting / scraping and storing time-series metrics data.
 
 ## Features
 
 - **Time-Series Database**: Efficient storage for metrics
 - **Powerful Querying**: PromQL for flexible metric analysis
 - **Service Discovery**: Automatic target discovery
-- **Alerting**: Rule-based alerting (with Alertmanager)
+- **Alerting**: Rule-based alerting
 - **Visualization**: Built-in expression browser and integration with Grafana
 
 ## Running with Docker
@@ -46,6 +46,7 @@ The configuration is in [prometheus.yml](prometheus.yml) and includes:
 |----------|--------|-------------|
 | `prometheus` | `localhost:9090` | Prometheus self-monitoring |
 | `node-exporter` | `node-exporter:9100` | System metrics |
+| `stock-exporter` | `stock-exporter:8000` | Experimental stock metrics |
 
 ### Adding New Targets
 
